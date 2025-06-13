@@ -1,25 +1,39 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Выберите операцию (введите цифру выбранной операции):\n1 сложение\n2 вычитание\n3 умножение\n4 деление");
+        System.out.println("Выберите задание (введите цифру):\n1 калькулятор\n2 поиск максимального слова в массиве");
         String operation = scanner.next();
-        Double result = chooseOperation(scanner, operation);
+        switch (operation) {
+            case "1" -> startCalculation(scanner);
+            case "2" -> findMaxWordInArray(scanner);
+            default -> System.err.println("Неизвестное задание!");
+        }
+        scanner.close();
+    }
+
+    private static void startCalculation(Scanner scanner) {
+        Double result = chooseMathOperation(scanner);
+        showResult(result);
+    }
+
+    private static void showResult(Double result) {
         if (result != null) {
             System.out.printf("Результат: %.4f", result);
         }
-        scanner.close();
     }
 
     /**
      * Метод выбора и вызова математической операции
      *
-     * @param scanner   сканер для чтения из консоли
-     * @param operation номер выбранной операции
+     * @param scanner сканер для чтения из консоли
      * @return результат математической операции
      */
-    private static Double chooseOperation(Scanner scanner, String operation) {
+    private static Double chooseMathOperation(Scanner scanner) {
+        System.out.println("Выберите операцию (введите цифру выбранной операции):\n1 сложение\n2 вычитание\n3 умножение\n4 деление");
+        String operation = scanner.next();
         switch (operation) {
             case "1" -> {
                 System.out.println("Введите 2 слагаемых через Enter, отделяйте дробную часть ЗАПЯТОЙ");
@@ -96,5 +110,78 @@ public class Main {
      */
     private static Double division(Double dividend, Double divisor) {
         return dividend / divisor;
+    }
+
+    /**
+     * Метод для запуска поиска максимального слова в массиве
+     *
+     * @param scanner сканер для чтения из консоли
+     */
+    private static void findMaxWordInArray(Scanner scanner) {
+        System.out.println("Введите размер массива (целое число):");
+        int arrayCount = scanner.nextInt();
+        if (arrayCount > 0) {
+            ArrayList<String> words = readStrings(scanner, arrayCount);
+            System.out.print("Введённый массив слов: ");
+            printWordsArray(words);
+            System.out.println();
+            ArrayList<String> wordsWithMaxLenght = findLongestWord(words);
+            System.out.print("Самое длинное слово(а) (" + wordsWithMaxLenght.get(0).length() + " символов):");
+            printWordsArray(wordsWithMaxLenght);
+        } else {
+            System.out.println("Вы задали отрицательный или нулевой размер массива!");
+        }
+    }
+
+    /**
+     * Метод чтения массива строк из консоли
+     *
+     * @param scanner    сканер для чтения из консоли
+     * @param arrayCount количество слов в массиве
+     * @return считанный из консоли массив строк
+     */
+    private static ArrayList<String> readStrings(Scanner scanner, int arrayCount) {
+        System.out.println("Введите " + arrayCount + " слов(а) через ENTER:");
+        ArrayList<String> words = new ArrayList<>();
+        while (words.size() < arrayCount) {
+            String str = scanner.next();
+            if (!words.contains(str)) {
+                words.add(str);
+            }
+        }
+        return words;
+    }
+
+    /**
+     * Метод поиска самого длинного слова/слов, если есть несколько слов
+     * одинаковой длинны с максимальным количеством символов
+     *
+     * @param words - массив слов из консоли
+     * @return список слов с максимальным количеством символов
+     */
+    private static ArrayList<String> findLongestWord(ArrayList<String> words) {
+        int maxLenght = 0;
+        ArrayList<String> wordsWithMaxLenght = new ArrayList<>();
+        for (String word : words) {
+            if (word.length() > maxLenght) {
+                maxLenght = word.length();
+                wordsWithMaxLenght.clear();
+                wordsWithMaxLenght.add(word);
+            } else if (word.length() == maxLenght) {
+                wordsWithMaxLenght.add(word);
+            }
+        }
+        return wordsWithMaxLenght;
+    }
+
+    /**
+     * Метод печати массива строк
+     *
+     * @param stringArrayForPrint массив строк, который нужно распечатать
+     */
+    private static void printWordsArray(ArrayList<String> stringArrayForPrint) {
+        for (String word : stringArrayForPrint) {
+            System.out.print(word + " ");
+        }
     }
 }

@@ -24,9 +24,7 @@ public class Main {
         for (int element : array) {
             System.out.print(element + " ");
         }
-        System.out.println();
-        System.out.println();
-        System.out.println("Part 2");
+        System.out.println("\n\nPart 2");
         Candy candyStrawberry = new Candy("Strawberry", 10.4, 5.5, "XXL");
         Candy candyBlueberry = new Candy("Blueberry", 5.2, 3.5, "XL");
         Jellybean jellybeanApple = new Jellybean();

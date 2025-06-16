@@ -26,7 +26,6 @@ public class Main {
      * @param firstIndex  индекс первого для замены элемента
      * @param secondIndex индекс второго для замены элемента
      * @param array       массив, в котором нужно поменять местами элементы
-     * @return изменённый массив
      */
     private static void swapElements(int firstIndex, int secondIndex, int[] array) {
         int elementForChange = array[firstIndex];

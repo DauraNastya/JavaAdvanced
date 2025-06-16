@@ -15,8 +15,8 @@ public class Main {
         System.out.println("Index max- " + maxIndex);
         swapElements(maxIndex, minIndex, array);
         System.out.println("Array after changing:");
-        for (int j = 0; j < array.length; j++) {
-            System.out.print(array[j] + " ");
+        for (int element : array) {
+            System.out.print(element + " ");
         }
     }
 
@@ -28,11 +28,10 @@ public class Main {
      * @param array       массив, в котором нужно поменять местами элементы
      * @return изменённый массив
      */
-    private static int[] swapElements(int firstIndex, int secondIndex, int[] array) {
+    private static void swapElements(int firstIndex, int secondIndex, int[] array) {
         int elementForChange = array[firstIndex];
         array[firstIndex] = array[secondIndex];
         array[secondIndex] = elementForChange;
-        return array;
     }
 
     /**

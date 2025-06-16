@@ -1,4 +1,5 @@
 import calculation.PrimitiveCalculation;
+import exeptions.NullDividerException;
 
 import java.util.Scanner;
 
@@ -11,7 +12,11 @@ public class Main {
         System.out.println("Введите 2 числа через Enter, отделяйте дробную часть ЗАПЯТОЙ");
         calculation.setA(scanner.nextDouble());
         calculation.setB(scanner.nextDouble());
-        calculation.calculate();
+        try {
+            calculation.calculate();
+        } catch (NullDividerException e) {
+            System.out.println(e.getMessage());
+        }
         calculation.showResult();
         scanner.close();
     }

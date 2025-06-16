@@ -1,5 +1,7 @@
 package calculation;
 
+import exeptions.NullDividerException;
+
 public class PrimitiveCalculation extends CommonCalculation {
     private Double result;
 
@@ -10,18 +12,12 @@ public class PrimitiveCalculation extends CommonCalculation {
         super(a, b, operation);
     }
 
-    public void calculate() {
+    public void calculate() throws NullDividerException {
         switch (this.getOperation()) {
             case "1" -> addition(this.getA(), this.getB());
             case "2" -> subtraction(this.getA(), this.getB());
             case "3" -> multiplication(this.getA(), this.getB());
-            case "4" -> {
-                if (this.getB() == 0) {
-                    System.err.println("Делить на нуль нельзя!");
-                } else {
-                    division(this.getA(), this.getB());
-                }
-            }
+            case "4" -> division(this.getA(), this.getB());
             default -> System.err.println("Неизвестная операция!");
         }
     }
@@ -67,8 +63,13 @@ public class PrimitiveCalculation extends CommonCalculation {
      *
      * @param dividend делимое
      * @param divisor  делитель
+     * @throws NullDividerException - выброс исключения при делителе равном нулю.
      */
-    private void division(double dividend, double divisor) {
-        this.result = dividend / divisor;
+    private void division(double dividend, double divisor) throws NullDividerException {
+        if (divisor == 0) {
+            throw new NullDividerException("Divider is NULL!");
+        } else {
+            this.result = dividend / divisor;
+        }
     }
 }

@@ -1,9 +1,9 @@
 package calculation;
 
 public class CommonCalculation {
-    private double a;
-    private double b;
-    private String operation;
+    protected double a;
+    protected double b;
+    protected String operation;
 
     public CommonCalculation() {
     }

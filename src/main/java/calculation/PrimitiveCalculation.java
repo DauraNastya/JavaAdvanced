@@ -34,7 +34,7 @@ public class PrimitiveCalculation extends CommonCalculation {
      * @param firstSummand  первое слагаемое
      * @param secondSummand второе слагаемое
      */
-    private void addition(double firstSummand, double secondSummand) {
+    public void addition(double firstSummand, double secondSummand) {
         this.result = firstSummand + secondSummand;
     }
 
@@ -44,7 +44,7 @@ public class PrimitiveCalculation extends CommonCalculation {
      * @param minuend    уменьшаемое
      * @param subtrahend вычитаемое
      */
-    private void subtraction(double minuend, double subtrahend) {
+    public void subtraction(double minuend, double subtrahend) {
         this.result = minuend - subtrahend;
     }
 
@@ -54,7 +54,7 @@ public class PrimitiveCalculation extends CommonCalculation {
      * @param firstMultiplier  первый множитель
      * @param secondMultiplier сторой множитель
      */
-    private void multiplication(double firstMultiplier, double secondMultiplier) {
+    public void multiplication(double firstMultiplier, double secondMultiplier) {
         this.result = firstMultiplier * secondMultiplier;
     }
 
@@ -65,7 +65,7 @@ public class PrimitiveCalculation extends CommonCalculation {
      * @param divisor  делитель
      * @throws NullDividerException - выброс исключения при делителе равном нулю.
      */
-    private void division(double dividend, double divisor) throws NullDividerException {
+    public void division(double dividend, double divisor) throws NullDividerException {
         if (divisor == 0) {
             throw new NullDividerException("Divider is NULL!");
         } else {

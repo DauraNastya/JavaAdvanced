@@ -14,10 +14,10 @@ public class PrimitiveCalculation extends CommonCalculation {
 
     public void calculate() throws NullDividerException {
         switch (this.getOperation()) {
-            case "1" -> addition(this.getA(), this.getB());
-            case "2" -> subtraction(this.getA(), this.getB());
-            case "3" -> multiplication(this.getA(), this.getB());
-            case "4" -> division(this.getA(), this.getB());
+            case "1" -> addition(a, b);
+            case "2" -> subtraction(a, b);
+            case "3" -> multiplication(a, b);
+            case "4" -> division(a, b);
             default -> System.err.println("Неизвестная операция!");
         }
     }

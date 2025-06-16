@@ -1,100 +1,75 @@
-import java.util.Scanner;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Выберите операцию (введите цифру выбранной операции):\n1 сложение\n2 вычитание\n3 умножение\n4 деление");
-        String operation = scanner.next();
-        Double result = chooseOperation(scanner, operation);
-        if (result != null) {
-            System.out.printf("Результат: %.4f", result);
+        Random random = new Random();
+        int[] array = new int[20];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = random.nextInt(200) - 100;
+            System.out.print(array[i] + " ");
         }
-        scanner.close();
+        System.out.println();
+        int minIndex = findMinPositiveInArray(array);
+        int maxIndex = findMaxNegativeInArray(array);
+        System.out.println("Index min+ " + minIndex);
+        System.out.println("Index max- " + maxIndex);
+        swapElements(maxIndex, minIndex, array);
+        System.out.println("Array after changing:");
+        for (int j = 0; j < array.length; j++) {
+            System.out.print(array[j] + " ");
+        }
     }
 
     /**
-     * Метод выбора и вызова математической операции
+     * Метод меняет местами 2 элемента массива
      *
-     * @param scanner   сканер для чтения из консоли
-     * @param operation номер выбранной операции
-     * @return результат математической операции
+     * @param firstIndex  индекс первого для замены элемента
+     * @param secondIndex индекс второго для замены элемента
+     * @param array       массив, в котором нужно поменять местами элементы
+     * @return изменённый массив
      */
-    private static Double chooseOperation(Scanner scanner, String operation) {
-        switch (operation) {
-            case "1" -> {
-                System.out.println("Введите 2 слагаемых через Enter, отделяйте дробную часть ЗАПЯТОЙ");
-                Double firstSummand = scanner.nextDouble();
-                Double secondSummand = scanner.nextDouble();
-                return addition(firstSummand, secondSummand);
-            }
-            case "2" -> {
-                System.out.println("Введите уменьшаемое и вычитаемое через Enter, отделяйте дробную часть ЗАПЯТОЙ");
-                Double minuend = scanner.nextDouble();
-                Double subtrahend = scanner.nextDouble();
-                return subtraction(minuend, subtrahend);
-            }
-            case "3" -> {
-                System.out.println("Введите 2 множителя через Enter, отделяйте дробную часть ЗАПЯТОЙ");
-                Double firstMultiplier = scanner.nextDouble();
-                Double secondMultiplier = scanner.nextDouble();
-                return multiplication(firstMultiplier, secondMultiplier);
-            }
-            case "4" -> {
-                System.out.println("Введите делимое и делитель2 через Enter, отделяйте дробную часть ЗАПЯТОЙ");
-                Double dividend = scanner.nextDouble();
-                Double divisor = scanner.nextDouble();
-                if (divisor == 0) {
-                    System.err.println("Делить на нуль нельзя!");
-                } else {
-                    return division(dividend, divisor);
+    private static int[] swapElements(int firstIndex, int secondIndex, int[] array) {
+        int elementForChange = array[firstIndex];
+        array[firstIndex] = array[secondIndex];
+        array[secondIndex] = elementForChange;
+        return array;
+    }
+
+    /**
+     * Метод для поиска минимального положительного элемента в массиве
+     *
+     * @param array массив, в котором ищем
+     * @return индекс минимального положительного элемента
+     */
+    private static int findMinPositiveInArray(int[] array) {
+        int min = 500, minIndex = -1;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > 0) {
+                if (array[i] < min) {
+                    min = array[i];
+                    minIndex = i;
                 }
             }
-            default -> System.err.println("Неизвестная операция!");
         }
-        return null;
+        return minIndex;
     }
 
     /**
-     * Метод сложения 2х чисел с плавающей запятой
+     * Метод для поиска максимального отрицательного элемента в массиве
      *
-     * @param firstSummand  первое слагаемое
-     * @param secondSummand второе слагаемое
-     * @return сумма
+     * @param array массив, в котором ищем
+     * @return индекс максимального отрицательного элемента
      */
-    private static Double addition(Double firstSummand, Double secondSummand) {
-        return firstSummand + secondSummand;
-    }
-
-    /**
-     * Метод вычитания 2х чисел
-     *
-     * @param minuend    уменьшаемое
-     * @param subtrahend вычитаемое
-     * @return разность
-     */
-    private static Double subtraction(Double minuend, Double subtrahend) {
-        return minuend - subtrahend;
-    }
-
-    /**
-     * Метод умножения 2х чисел
-     *
-     * @param firstMultiplier  первый множитель
-     * @param secondMultiplier сторой множитель
-     * @return произведение
-     */
-    private static Double multiplication(Double firstMultiplier, Double secondMultiplier) {
-        return firstMultiplier * secondMultiplier;
-    }
-
-    /**
-     * Метод деления 2х чисел
-     *
-     * @param dividend делимое
-     * @param divisor  делитель
-     * @return частное
-     */
-    private static Double division(Double dividend, Double divisor) {
-        return dividend / divisor;
+    private static int findMaxNegativeInArray(int[] array) {
+        int max = -500, maxIndex = -1;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < 0) {
+                if (array[i] > max) {
+                    max = array[i];
+                    maxIndex = i;
+                }
+            }
+        }
+        return maxIndex;
     }
 }

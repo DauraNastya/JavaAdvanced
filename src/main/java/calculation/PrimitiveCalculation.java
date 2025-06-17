@@ -71,4 +71,12 @@ public class PrimitiveCalculation extends CommonCalculation {
     private void division(double dividend, double divisor) {
         this.result = dividend / divisor;
     }
+
+    public Double getResult() {
+        return result;
+    }
+
+    public void setResult(Double result) {
+        this.result = result;
+    }
 }

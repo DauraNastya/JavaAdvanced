@@ -67,4 +67,12 @@ public class PrimitiveCalculationTest {
         NullDividerException thrown = Assertions.assertThrows(NullDividerException.class, () -> calculation.division(4.4, 0), "NullDividerException was expected");
         Assertions.assertEquals("Divider is NULL!", thrown.getMessage());
     }
+
+    @Test
+    public void calculateExpectedIllegalArgumentException() {
+        PrimitiveCalculation calculation = new PrimitiveCalculation();
+        calculation.setOperation("5");
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, calculation::calculate, "IllegalArgumentException was expected");
+        Assertions.assertNull(thrown.getMessage());
+    }
 }

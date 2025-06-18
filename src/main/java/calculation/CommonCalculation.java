@@ -4,6 +4,7 @@ public class CommonCalculation {
     protected double a;
     protected double b;
     protected String operation;
+    protected Double result;
 
     public CommonCalculation() {
     }
@@ -36,5 +37,13 @@ public class CommonCalculation {
 
     public void setOperation(String operation) {
         this.operation = operation;
+    }
+
+    public Double getResult() {
+        return result;
+    }
+
+    public void setResult(Double result) {
+        this.result = result;
     }
 }

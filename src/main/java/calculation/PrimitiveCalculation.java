@@ -3,8 +3,6 @@ package calculation;
 import exeptions.NullDividerException;
 
 public class PrimitiveCalculation extends CommonCalculation {
-    private Double result;
-
     public PrimitiveCalculation() {
     }
 
@@ -18,7 +16,7 @@ public class PrimitiveCalculation extends CommonCalculation {
             case "2" -> subtraction(a, b);
             case "3" -> multiplication(a, b);
             case "4" -> division(a, b);
-            default -> System.err.println("Неизвестная операция!");
+            default -> throw new IllegalArgumentException();
         }
     }
 
@@ -34,8 +32,9 @@ public class PrimitiveCalculation extends CommonCalculation {
      * @param firstSummand  первое слагаемое
      * @param secondSummand второе слагаемое
      */
-    public void addition(double firstSummand, double secondSummand) {
+    public Double addition(double firstSummand, double secondSummand) {
         this.result = firstSummand + secondSummand;
+        return this.result;
     }
 
     /**
@@ -43,9 +42,11 @@ public class PrimitiveCalculation extends CommonCalculation {
      *
      * @param minuend    уменьшаемое
      * @param subtrahend вычитаемое
+     * @return разность
      */
-    public void subtraction(double minuend, double subtrahend) {
+    public Double subtraction(double minuend, double subtrahend) {
         this.result = minuend - subtrahend;
+        return this.result;
     }
 
     /**
@@ -53,9 +54,11 @@ public class PrimitiveCalculation extends CommonCalculation {
      *
      * @param firstMultiplier  первый множитель
      * @param secondMultiplier сторой множитель
+     * @return произведение
      */
-    public void multiplication(double firstMultiplier, double secondMultiplier) {
+    public Double multiplication(double firstMultiplier, double secondMultiplier) {
         this.result = firstMultiplier * secondMultiplier;
+        return this.result;
     }
 
     /**
@@ -63,21 +66,15 @@ public class PrimitiveCalculation extends CommonCalculation {
      *
      * @param dividend делимое
      * @param divisor  делитель
+     * @return частное
      * @throws NullDividerException - выброс исключения при делителе равном нулю.
      */
-    public void division(double dividend, double divisor) throws NullDividerException {
+    public Double division(double dividend, double divisor) throws NullDividerException {
         if (divisor == 0) {
             throw new NullDividerException("Divider is NULL!");
         } else {
             this.result = dividend / divisor;
+            return this.result;
         }
-    }
-
-    public Double getResult() {
-        return result;
-    }
-
-    public void setResult(Double result) {
-        this.result = result;
     }
 }
